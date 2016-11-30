@@ -1,7 +1,7 @@
 package com.example.anthonykim.kim;
 
 import android.content.DialogInterface;
-import android.support.annotation.NonNull;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -10,11 +10,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.os.Bundle;
 import android.widget.Toast;
-
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +22,7 @@ import butterknife.OnClick;
 public class GameTableFragment extends Fragment implements TicTacToeContract.PublishToGameTable{
 
     private TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction;
+    private long mLastClickTime = 0;
 
     public void setPresenter(TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction){
         this.forwardInteraction = forwardInteraction;
@@ -54,6 +50,11 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     @OnClick({R.id.imageButton1, R.id.imageButton2, R.id.imageButton3, R.id.imageButton4, R.id.imageButton5,
             R.id.imageButton6, R.id.imageButton7, R.id.imageButton8, R.id.imageButton9})
     public void OnItemClick(View v){
+        if(SystemClock.elapsedRealtime() - mLastClickTime < 500){
+            return;
+        }
+        mLastClickTime = SystemClock.elapsedRealtime();
+
         switch (v.getId()){
             case R.id.imageButton1:
                 forwardInteraction.onGameTableItemClick(0);
@@ -210,15 +211,15 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     private void chooseFirst(){
         final AlertDialog.Builder builder  = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false);
-        builder.setTitle("Who is First?");
-        builder.setMessage("Choose First or Second...");
-        builder.setPositiveButton("Second", new DialogInterface.OnClickListener() {
+        builder.setTitle(getText(R.string.setting_dialog_title));
+        builder.setMessage(getText(R.string.setting_dialog_chooseFirst));
+        builder.setPositiveButton(getText(R.string.setting_dialog_second), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 forwardInteraction.aiStart();
             }
         });
-        builder.setNegativeButton("First", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getText(R.string.setting_dialog_first), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 

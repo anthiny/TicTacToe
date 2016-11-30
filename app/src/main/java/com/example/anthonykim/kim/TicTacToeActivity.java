@@ -11,14 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 
 public class TicTacToeActivity extends AppCompatActivity{
     TicTacToePresenter presenter;
-    //Vibrator vibrator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tictactoe);
-
-        //vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
         GameTableFragment gameTableFragment =
                 (GameTableFragment) getSupportFragmentManager().findFragmentById(R.id.frag_game_table);

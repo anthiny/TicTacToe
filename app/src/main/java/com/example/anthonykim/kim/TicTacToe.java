@@ -62,24 +62,21 @@ public class TicTacToe {
 
         if (winPoint != -1) {
             GameTableModel.getInstance().setItemValue(winPoint, 2);
-            ticTacToeResult.onGameTableChanged(idx, 2);
+            ticTacToeResult.onGameTableChanged(winPoint, 2);
+            Log.d("AI Win","AI Win Point: "+ winPoint);
             GameTableModel.getInstance().setAiWin(true);
         }
         else if (userWinPoint != -1){
             temp[userWinPoint] = 2;
             GameTableModel.getInstance().setItemValue(userWinPoint, 2);
-            /*if(userWinPoint == 0 || userWinPoint == 2 || userWinPoint == 6 || userWinPoint == 8){
-                DeleteEdges(userWinPoint);
-            }*/
             ticTacToeResult.onGameTableChanged(userWinPoint, 2);
         }
         else{
             int tempIdx = FindEmptyEdge();
             if (tempIdx != -1){
                 GameTableModel.getInstance().setItemValue(tempIdx, 2);
-                //DeleteEdges(tempIdx);
                 ticTacToeResult.onGameTableChanged(tempIdx, 2);
-                //Log.d("deleteEdge", "DeletedEdge is "+tempIdx+"////" +edges.size());
+                Log.d("deleteEdge", "DeletedEdge is "+tempIdx);
             }
             else if (IsCoreEmpty()){
                 GameTableModel.getInstance().setItemValue(4, 2);
@@ -88,9 +85,6 @@ public class TicTacToe {
             else
             {
                 tempIdx = FindEmptyRandomIndex();
-                /*if(tempIdx == 0 || tempIdx == 2 || tempIdx == 6 || tempIdx == 8){
-                    DeleteEdges(temp);
-                }*/
                 GameTableModel.getInstance().setItemValue(tempIdx, 2);
                 ticTacToeResult.onGameTableChanged(tempIdx, 2);
             }
