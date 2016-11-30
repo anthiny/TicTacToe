@@ -9,7 +9,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     private TicTacToeContract.PublishToGameTable publishToGameTable;
     private TicTacToeContract.PublishToStatus publishToStatus;
-
     private TicTacToe ticTacToe;
 
     public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
@@ -38,7 +37,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void onDialogEndClick() {
-
+        publishToStatus.finishApp();
     }
 
     @Override

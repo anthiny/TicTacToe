@@ -15,6 +15,7 @@ public interface TicTacToeContract {
 
     interface PublishToStatus{
         void showTime(String time);
+        void finishApp();
     }
 
     interface ForwardGameTableInteractionToPresenter{

@@ -45,4 +45,11 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
     public void showTime(String time) {
         Toast.makeText(getActivity(),time, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void finishApp() {
+        getActivity().finish();
+        System.exit(0);
+    }
+
 }
