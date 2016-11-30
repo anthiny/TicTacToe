@@ -62,4 +62,14 @@ public class GameTableModel {
     public void setAiWin(Boolean aiWin) {
         this.aiWin = aiWin;
     }
+
+    public void resetTable(){
+        for (int i = 0; i < table.length; i++){
+            table[i] = 0;
+        }
+        userWin = false;
+        aiWin = false;
+        totalTurn = 9;
+        userTurn = 0;
+    }
 }

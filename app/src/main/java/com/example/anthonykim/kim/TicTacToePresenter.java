@@ -9,6 +9,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     private TicTacToeContract.PublishToGameTable publishToGameTable;
     private TicTacToeContract.PublishToStatus publishToStatus;
+
     private TicTacToe ticTacToe;
 
     public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
@@ -32,7 +33,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void onDialogContinueClick() {
-        publishToGameTable.resetGameTable();
+        onResetButtonClick();
     }
 
     @Override
@@ -43,6 +44,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void onResetButtonClick() {
         publishToGameTable.resetGameTable();
+        ticTacToe.resetGameTableData();
     }
 
     @Override

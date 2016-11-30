@@ -201,16 +201,6 @@ public class TicTacToe {
         return -1;
     }
 
-    public Boolean isEdgeEmpty(int edgeIdx){
-        int temp[] = GameTableModel.getInstance().getTable();
-        if (temp[edgeIdx] == 0){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     public boolean IsCoreEmpty(){
         int temp[] = GameTableModel.getInstance().getTable();
         if (temp[4] != 0)
@@ -248,8 +238,15 @@ public class TicTacToe {
         if(emptyEdges.size() == 0)
             return -1;
 
+        if(emptyEdges.size() == 1)
+            return emptyEdges.get(0);
+
         randIndex = rand.nextInt(emptyEdges.size());
         return emptyEdges.get(randIndex);
+    }
+
+    public void resetGameTableData(){
+        GameTableModel.getInstance().resetTable();
     }
 
 }
