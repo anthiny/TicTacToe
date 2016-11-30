@@ -15,4 +15,7 @@
     <string name="result_dialog_HumanWin">Winner is Human</string>
     <string name="result_dialog_continue">CONTINUE</string>
     <string name="result_dialog_end">END</string>
+    <string name="who_ai">AI</string>
+    <string name="who_human">HUMAN</string>
+    <string name="description">ITEM</string>
 </resources>

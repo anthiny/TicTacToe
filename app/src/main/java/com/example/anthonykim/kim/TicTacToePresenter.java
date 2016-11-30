@@ -1,0 +1,67 @@
+package com.example.anthonykim.kim;
+
+/**
+ * Created by anthony on 2016. 11. 29..
+ */
+
+public class TicTacToePresenter implements TicTacToeContract.ForwardStatusInteractionToPresenter,
+        TicTacToeContract.ForwardGameTableInteractionToPresenter, TicTacToe.TicTacToeResult {
+
+    private TicTacToeContract.PublishToGameTable publishToGameTable;
+    private TicTacToeContract.PublishToStatus publishToStatus;
+    private TicTacToe ticTacToe;
+
+    public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
+                               TicTacToeContract.PublishToGameTable publishToGameTable){
+        this.publishToGameTable = publishToGameTable;
+        this.publishToStatus = publishToStatus;
+
+        ticTacToe = new TicTacToe();
+        ticTacToe.setTicTacToeResultListener(this);
+    }
+
+    @Override
+    public void onGameTableItemClick(int idx) {
+       ticTacToe.inputHuman(idx);
+    }
+
+    @Override
+    public void aiStart() {
+        ticTacToe.inputTicphago();
+    }
+
+    @Override
+    public void onDialogContinueClick() {
+        publishToGameTable.resetGameTable();
+    }
+
+    @Override
+    public void onDialogEndClick() {
+
+    }
+
+    @Override
+    public void onResetButtonClick() {
+        publishToGameTable.resetGameTable();
+    }
+
+    @Override
+    public void onGameTableChanged(int idx, int mark) {
+        if (mark == 1){
+            publishToGameTable.showHumanMark(idx);
+        }
+        else if(mark == 2){
+            publishToGameTable.showTicphagoMark(idx);
+        }
+    }
+
+    @Override
+    public void winPopUp(String who) {
+        publishToGameTable.showDialog(who);
+    }
+
+    @Override
+    public void showToast(String text) {
+        publishToGameTable.showToast(text);
+    }
+}
