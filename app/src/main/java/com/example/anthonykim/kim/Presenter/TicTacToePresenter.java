@@ -1,6 +1,6 @@
 package com.example.anthonykim.kim.Presenter;
 
-import com.example.anthonykim.kim.TicTacToe;
+import com.example.anthonykim.kim.Model.TicTacToe;
 import com.example.anthonykim.kim.TicTacToeContract;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.anthonykim.kim;
+package com.example.anthonykim.kim.Model;
 
 import android.util.Log;
 
