@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/game_table"
     android:orientation="horizontal"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
     android:columnCount="3"
     android:rowCount="3"
     android:useDefaultMargins="true"
-    android:background="@color/colorDark"
     tools:context="com.example.anthonykim.kim.View.GameTableFragment">
 
     <ImageButton
