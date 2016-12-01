@@ -1,9 +1,10 @@
-package com.example.anthonykim.kim;
+package com.example.anthonykim.kim.View;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.anthonykim.kim.Presenter.TicTacToePresenter;
+import com.example.anthonykim.kim.R;
 
 /**
  * Created by anthony on 2016. 11. 29..

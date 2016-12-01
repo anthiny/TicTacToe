@@ -10,7 +10,7 @@
         android:label="Tap TicTacToe"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TicTacToeActivity">
+        <activity android:name=".View.TicTacToeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

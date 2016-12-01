@@ -1,4 +1,4 @@
-package com.example.anthonykim.kim;
+package com.example.anthonykim.kim.View;
 
 import android.content.DialogInterface;
 import android.os.SystemClock;
@@ -11,6 +11,9 @@ import android.widget.ImageButton;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.anthonykim.kim.R;
+import com.example.anthonykim.kim.TicTacToeContract;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -19,7 +22,7 @@ import butterknife.OnClick;
  * Created by anthony on 2016. 11. 29..
  */
 
-public class GameTableFragment extends Fragment implements TicTacToeContract.PublishToGameTable{
+public class GameTableFragment extends Fragment implements TicTacToeContract.PublishToGameTable {
 
     private TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction;
     private long mLastClickTime = 0;

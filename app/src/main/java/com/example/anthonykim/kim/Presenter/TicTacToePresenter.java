@@ -43,11 +43,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
         publishToStatus.finishApp();
     }
 
-    @Override
-    public void onResetButtonClick() {
-        publishToGameTable.resetGameTable();
-        ticTacToe.resetGameTableData();
-    }
 
     @Override
     public void onGameTableChanged(int idx, int mark) {
@@ -67,5 +62,11 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void showToast(String text) {
         publishToGameTable.showToast(text);
+    }
+
+    @Override
+    public void onResetButtonClick() {
+        publishToGameTable.resetGameTable();
+        ticTacToe.resetGameTableData();
     }
 }

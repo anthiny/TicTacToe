@@ -1,4 +1,4 @@
-package com.example.anthonykim.kim;
+package com.example.anthonykim.kim.View;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.anthonykim.kim.R;
+import com.example.anthonykim.kim.TicTacToeContract;
+
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -14,7 +17,7 @@ import butterknife.OnClick;
  * Created by anthony on 2016. 11. 29..
  */
 
-public class StatusFragment extends Fragment implements TicTacToeContract.PublishToStatus{
+public class StatusFragment extends Fragment implements TicTacToeContract.PublishToStatus {
     private TicTacToeContract.ForwardStatusInteractionToPresenter forwardInteraction;
 
     public void setPresenter(TicTacToeContract.ForwardStatusInteractionToPresenter forwardInteraction){
@@ -22,7 +25,7 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
     }
 
     @OnClick(R.id.reset_button)
-    void onResetClick(){
+    public void onResetClick(){
         forwardInteraction.onResetButtonClick();
     }
 

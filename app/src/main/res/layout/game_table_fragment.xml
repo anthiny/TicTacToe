@@ -10,7 +10,7 @@
     android:rowCount="3"
     android:useDefaultMargins="true"
     android:background="@color/colorDark"
-    tools:context="com.example.anthonykim.kim.GameTableFragment">
+    tools:context="com.example.anthonykim.kim.View.GameTableFragment">
 
     <ImageButton
         style="@style/ImageButtonDisplay"
