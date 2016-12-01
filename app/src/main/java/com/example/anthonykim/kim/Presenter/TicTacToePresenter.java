@@ -1,4 +1,7 @@
-package com.example.anthonykim.kim;
+package com.example.anthonykim.kim.Presenter;
+
+import com.example.anthonykim.kim.TicTacToe;
+import com.example.anthonykim.kim.TicTacToeContract;
 
 /**
  * Created by anthony on 2016. 11. 29..

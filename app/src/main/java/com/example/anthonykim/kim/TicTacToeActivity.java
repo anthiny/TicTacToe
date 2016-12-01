@@ -1,9 +1,9 @@
 package com.example.anthonykim.kim;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
+
+import com.example.anthonykim.kim.Presenter.TicTacToePresenter;
 
 /**
  * Created by anthony on 2016. 11. 29..
