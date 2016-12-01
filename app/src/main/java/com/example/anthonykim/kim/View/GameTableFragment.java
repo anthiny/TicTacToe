@@ -25,6 +25,7 @@ import butterknife.OnClick;
 public class GameTableFragment extends Fragment implements TicTacToeContract.PublishToGameTable {
 
     private TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction;
+    final long WaitingClickTime = 500;
     private long mLastClickTime = 0;
 
     public void setPresenter(TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction){
@@ -53,7 +54,7 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     @OnClick({R.id.imageButton1, R.id.imageButton2, R.id.imageButton3, R.id.imageButton4, R.id.imageButton5,
             R.id.imageButton6, R.id.imageButton7, R.id.imageButton8, R.id.imageButton9})
     public void OnItemClick(View v){
-        if(SystemClock.elapsedRealtime() - mLastClickTime < 500){
+        if(SystemClock.elapsedRealtime() - mLastClickTime < WaitingClickTime){
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
@@ -172,8 +173,8 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     }
 
     @Override
-    public void showToast(String text){
-        Toast.makeText(getActivity(), text, Toast.LENGTH_SHORT).show();
+    public void showOverlapToast() {
+        Toast.makeText(getActivity(), getText(R.string.overlap_toast), Toast.LENGTH_SHORT).show();
     }
 
     @Override

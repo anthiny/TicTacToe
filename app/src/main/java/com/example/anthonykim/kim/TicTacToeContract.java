@@ -9,7 +9,8 @@ public interface TicTacToeContract {
         void showHumanMark(int idx);
         void showTicphagoMark(int idx);
         void showDialog(String text);
-        void showToast(String text);
+        //void showToast(String text);
+        void showOverlapToast();
         void resetGameTable();
     }
 

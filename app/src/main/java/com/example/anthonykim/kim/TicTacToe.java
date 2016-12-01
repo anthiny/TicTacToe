@@ -15,11 +15,15 @@ import java.util.Random;
 public class TicTacToe {
 
     private TicTacToeResult ticTacToeResult;
+    private final int HumanFlag = 1;
+    private final int AiFlag = 2;
+    private final int NotFound = -1;
+    private final int Found = 99;
 
     public interface TicTacToeResult{
         void onGameTableChanged(int idx, int mark);
         void winPopUp(String who);
-        void showToast(String text);
+        void showOverlapToast();
     }
 
     public void setTicTacToeResultListener(TicTacToeResult ticTacToeResult){
@@ -30,13 +34,13 @@ public class TicTacToe {
         int temp[] = GameTableModel.getInstance().getTable();
         if (temp[idx]==0){
             Log.d("Human","Human Index: "+idx);
-            GameTableModel.getInstance().setItemValue(idx, 1);
-            ticTacToeResult.onGameTableChanged(idx, 1);
+            GameTableModel.getInstance().setItemValue(idx, HumanFlag);
+            ticTacToeResult.onGameTableChanged(idx, HumanFlag);
             GameTableModel.getInstance().increaseUserTurn();
             GameTableModel.getInstance().decreaseTotalTurn();
 
             if (GameTableModel.getInstance().getUserTurn() > 2){
-                if(FindWinPoint("HUMAN") == 99){
+                if(FindWinPoint(HumanFlag) == Found){
                     GameTableModel.getInstance().setUserWin(true);
                     ticTacToeResult.winPopUp("HUMAN");
                 }
@@ -50,43 +54,43 @@ public class TicTacToe {
             }
         }
         else {
-            ticTacToeResult.showToast("Already Clicked!");
+            ticTacToeResult.showOverlapToast();
         }
     }
 
     public void inputTicphago(){
-        int winPoint = FindWinPoint("AI");
-        int userWinPoint = FindWinPoint("HUMAN");
+        int winPoint = FindWinPoint(AiFlag);
+        int userWinPoint = FindWinPoint(HumanFlag);
         int temp[] = GameTableModel.getInstance().getTable();
         Log.d("user Win","User Win Point: "+ userWinPoint);
 
-        if (winPoint != -1) {
-            GameTableModel.getInstance().setItemValue(winPoint, 2);
-            ticTacToeResult.onGameTableChanged(winPoint, 2);
+        if (winPoint != NotFound) {
+            GameTableModel.getInstance().setItemValue(winPoint, AiFlag);
+            ticTacToeResult.onGameTableChanged(winPoint, AiFlag);
             Log.d("AI Win","AI Win Point: "+ winPoint);
             GameTableModel.getInstance().setAiWin(true);
         }
-        else if (userWinPoint != -1){
-            temp[userWinPoint] = 2;
-            GameTableModel.getInstance().setItemValue(userWinPoint, 2);
-            ticTacToeResult.onGameTableChanged(userWinPoint, 2);
+        else if (userWinPoint != NotFound){
+            temp[userWinPoint] = AiFlag;
+            GameTableModel.getInstance().setItemValue(userWinPoint, AiFlag);
+            ticTacToeResult.onGameTableChanged(userWinPoint, AiFlag);
         }
         else{
             int tempIdx = FindEmptyEdge();
-            if (tempIdx != -1){
-                GameTableModel.getInstance().setItemValue(tempIdx, 2);
-                ticTacToeResult.onGameTableChanged(tempIdx, 2);
+            if (tempIdx != NotFound){
+                GameTableModel.getInstance().setItemValue(tempIdx, AiFlag);
+                ticTacToeResult.onGameTableChanged(tempIdx, AiFlag);
                 Log.d("deleteEdge", "DeletedEdge is "+tempIdx);
             }
             else if (IsCoreEmpty()){
-                GameTableModel.getInstance().setItemValue(4, 2);
-                ticTacToeResult.onGameTableChanged(4, 2);
+                GameTableModel.getInstance().setItemValue(4, AiFlag);
+                ticTacToeResult.onGameTableChanged(4, AiFlag);
             }
             else
             {
                 tempIdx = FindEmptyRandomIndex();
-                GameTableModel.getInstance().setItemValue(tempIdx, 2);
-                ticTacToeResult.onGameTableChanged(tempIdx, 2);
+                GameTableModel.getInstance().setItemValue(tempIdx, AiFlag);
+                ticTacToeResult.onGameTableChanged(tempIdx, AiFlag);
             }
         }
         GameTableModel.getInstance().decreaseTotalTurn();
@@ -99,25 +103,16 @@ public class TicTacToe {
         }
     }
 
-    public int transWhoToInt(String who){
-        if (who == "AI"){
-            return 2;
-        }
-        else{
-            return 1;
-        }
-    }
-
-    public int FindWinPoint(String who){
+    public int FindWinPoint(int whoFlag){
         int cnt = 0;
         int temp[] =  GameTableModel.getInstance().getTable();
-        int tempEmptyIndex = -1;
+        int tempEmptyIndex = NotFound;
         int index;
 
         for(int i =0;i<3;i++){
             for(int j=0;j<3;j++){
                 index = i*3+j;
-                if(temp[index] == transWhoToInt(who)) {
+                if(temp[index] == whoFlag) {
                     cnt++;
                 }
                 else if(temp[index] == 0){
@@ -131,7 +126,7 @@ public class TicTacToe {
                 return tempEmptyIndex;
             }
             else if(cnt == 3){
-                return 99;
+                return Found;
             }
             else{
                 cnt = 0;
@@ -141,7 +136,7 @@ public class TicTacToe {
         for(int i =0;i<3;i++){
             for(int j=0;j<3;j++){
                 index = i+j*3;
-                if(temp[index]==transWhoToInt(who)){
+                if(temp[index]==whoFlag){
                     cnt++;
                 }
                 else if(temp[index] == 0){
@@ -155,7 +150,7 @@ public class TicTacToe {
                 return tempEmptyIndex;
             }
             else if(cnt == 3){
-                return 99;
+                return Found;
             }
             else{
                 cnt = 0;
@@ -171,7 +166,7 @@ public class TicTacToe {
 
                 index = i*2+j*weight;
 
-                if(temp[index]==transWhoToInt(who)){
+                if(temp[index]==whoFlag){
                     cnt++;
                 }
                 else if(temp[index] == 0){
@@ -185,14 +180,14 @@ public class TicTacToe {
                 return  tempEmptyIndex;
             }
             else if(cnt == 3){
-                return 99;
+                return Found;
             }
             else{
                 cnt = 0;
             }
         }
 
-        return -1;
+        return NotFound;
     }
 
     public boolean IsCoreEmpty(){
@@ -205,7 +200,7 @@ public class TicTacToe {
 
     public int FindEmptyRandomIndex(){
         Random rand= new Random();
-        int randIndex = 0;
+        int randIndex;
         int temp[] = GameTableModel.getInstance().getTable();
         List<Integer> emptyIdxs= new ArrayList<>();
         for (int i=0;i<temp.length;i++){
@@ -220,7 +215,7 @@ public class TicTacToe {
 
     public int FindEmptyEdge(){
         Random rand= new Random();
-        int randIndex = 0;
+        int randIndex;
         int temp[] = GameTableModel.getInstance().getTable();
         List<Integer> emptyEdges= new ArrayList<>();
         for (int i=0;i<temp.length;i+=2){
@@ -230,7 +225,7 @@ public class TicTacToe {
         }
 
         if(emptyEdges.size() == 0)
-            return -1;
+            return NotFound;
 
         if(emptyEdges.size() == 1)
             return emptyEdges.get(0);

@@ -5,6 +5,7 @@
     <string name="setting_dialog_first">First</string>
     <string name="setting_dialog_second">Second</string>
     <string name="setting_dialog_selectTimeLimit">Select Time Limit</string>
+    <string name="overlap_toast">Already Clicked</string>
     <string-array name="TimeTable">
         <item>30</item>
         <item>45</item>
