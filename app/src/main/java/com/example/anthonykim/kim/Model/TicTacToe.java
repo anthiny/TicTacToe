@@ -1,9 +1,6 @@
 package com.example.anthonykim.kim.Model;
 
 import android.util.Log;
-
-import com.example.anthonykim.kim.Model.GameTableModel;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -19,7 +16,6 @@ public class TicTacToe {
     private final int AiFlag = 2;
     private final int NotFound = -1;
     private final int Found = 99;
-
     public interface TicTacToeResult{
         void onGameTableChanged(int idx, int mark);
         void winPopUp(String who);

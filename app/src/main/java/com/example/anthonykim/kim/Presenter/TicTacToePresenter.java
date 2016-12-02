@@ -1,5 +1,9 @@
 package com.example.anthonykim.kim.Presenter;
 
+import android.os.CountDownTimer;
+import android.util.Log;
+
+import com.example.anthonykim.kim.Model.GameTableModel;
 import com.example.anthonykim.kim.Model.TicTacToe;
 import com.example.anthonykim.kim.TicTacToeContract;
 
@@ -13,6 +17,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     private TicTacToeContract.PublishToGameTable publishToGameTable;
     private TicTacToeContract.PublishToStatus publishToStatus;
     private TicTacToe ticTacToe;
+    CountDownTimer countDownTimer;
 
     public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
                                TicTacToeContract.PublishToGameTable publishToGameTable){
@@ -21,16 +26,53 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
         ticTacToe = new TicTacToe();
         ticTacToe.setTicTacToeResultListener(this);
+
+        prepareFirstGame();
     }
 
     @Override
     public void onGameTableItemClick(int idx) {
-       ticTacToe.inputHuman(idx);
+        if (GameTableModel.getInstance().getTotalTurn() == 9){
+            startTimer();
+        }
+        ticTacToe.inputHuman(idx);
     }
 
     @Override
     public void aiStart() {
+        if (GameTableModel.getInstance().getTotalTurn() == 9){
+            startTimer();
+        }
         ticTacToe.inputTicphago();
+    }
+
+    private void prepareFirstGame(){
+        publishToGameTable.chooseFirst();
+        publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));
+    }
+
+    private void startTimer() {
+       countDownTimer = new CountDownTimer(GameTableModel.getInstance().getLimitTime(), 1000) {
+            int weight=0;
+            @Override
+            public void onTick(long millisUntilFinished) {
+                weight = weight + 1;
+                Log.d("timer", String.valueOf(GameTableModel.getInstance().getTimeProgress(weight)));
+                publishToStatus.changingProgressValue(GameTableModel.getInstance().getTimeProgress(weight));
+            }
+
+            @Override
+            public void onFinish() {
+                winPopUp("Time Over !");
+                publishToStatus.changingProgressValue(0);
+                Log.d("timer","finish");
+            }
+        };
+        countDownTimer.start();
+    }
+
+    private void pauseTimer(){
+        countDownTimer.cancel();
     }
 
     @Override
@@ -56,6 +98,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void winPopUp(String who) {
+        pauseTimer();
         publishToGameTable.showDialog(who);
     }
 
@@ -68,5 +111,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     public void onResetButtonClick() {
         publishToGameTable.resetGameTable();
         ticTacToe.resetGameTableData();
+        publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));
     }
 }

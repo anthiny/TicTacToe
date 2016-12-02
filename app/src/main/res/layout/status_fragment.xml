@@ -22,15 +22,14 @@
         android:layout_below="@+id/guide_line"
         android:layout_marginTop="20dp"
         android:layout_width="250dp"
-        android:max="100"
-        android:progress="90"
+        android:progress="0"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         />
 
     <Button
         android:id="@+id/reset_button"
-        android:background="@drawable/roundedbutton"
+        android:background="@drawable/rounded_button"
         android:text="@string/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

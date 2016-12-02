@@ -212,7 +212,8 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
         chooseFirst();
     }
 
-    private void chooseFirst(){
+    @Override
+    public void chooseFirst(){
         final AlertDialog.Builder builder  = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false);
         builder.setTitle(getText(R.string.setting_dialog_title));

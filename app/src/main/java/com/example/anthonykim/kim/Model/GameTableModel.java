@@ -7,7 +7,7 @@ public class GameTableModel {
     private static GameTableModel instance;
 
     private int table[] = {0,0,0,0,0,0,0,0,0};
-
+    private int limitTime = 30000;
     private int userTurn = 0;
     private int totalTurn = 9;
 
@@ -22,6 +22,14 @@ public class GameTableModel {
     }
 
     private GameTableModel() {}
+
+    public int getLimitTime() {
+        return limitTime;
+    }
+
+    public int getTimeProgress(int weight){
+        return (limitTime/1000 - weight);
+    }
 
     public int[] getTable() {
         return table;

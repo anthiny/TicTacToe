@@ -9,13 +9,14 @@ public interface TicTacToeContract {
         void showHumanMark(int idx);
         void showTicphagoMark(int idx);
         void showDialog(String text);
-        //void showToast(String text);
         void showOverlapToast();
         void resetGameTable();
+        void chooseFirst();
     }
 
     interface PublishToStatus{
-        void showTime(String time);
+        void setProgressMax(int maxValue);
+        void changingProgressValue(int value);
         void finishApp();
     }
 
