@@ -5,11 +5,13 @@
     <string name="setting_dialog_first">First</string>
     <string name="setting_dialog_second">Second</string>
     <string name="setting_dialog_selectTimeLimit">Select Time Limit</string>
+    <string name="setting_dialog_spinnerTitle">Time Limit : </string>
+    <string name="setting_dialog_startButton">Start</string>
     <string name="overlap_toast">Already Clicked</string>
-    <string-array name="TimeTable">
+    <string-array name="time_table">
+        <item>10</item>
+        <item>20</item>
         <item>30</item>
-        <item>45</item>
-        <item>60</item>
     </string-array>
     <string name="reset_button">Reset</string>
     <string name="result_dialog_AiWin">Winner is Ticphago</string>

@@ -17,7 +17,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     private TicTacToeContract.PublishToGameTable publishToGameTable;
     private TicTacToeContract.PublishToStatus publishToStatus;
     private TicTacToe ticTacToe;
-    CountDownTimer countDownTimer;
+    private CountDownTimer countDownTimer;
 
     public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
                                TicTacToeContract.PublishToGameTable publishToGameTable){
@@ -39,6 +39,15 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     }
 
     @Override
+    public void saveSetting(int timeLimit, boolean isFirst) {
+        GameTableModel.getInstance().setLimitTime(timeLimit * 1000);
+        publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));
+        if (!isFirst){
+            aiStart();
+        }
+    }
+
+    @Override
     public void aiStart() {
         if (GameTableModel.getInstance().getTotalTurn() == 9){
             startTimer();
@@ -47,7 +56,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     }
 
     private void prepareFirstGame(){
-        publishToGameTable.chooseFirst();
+        publishToStatus.chooseFirst();
         publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));
     }
 
@@ -112,5 +121,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
         publishToGameTable.resetGameTable();
         ticTacToe.resetGameTableData();
         publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));
+        publishToStatus.chooseFirst();
     }
 }

@@ -209,27 +209,8 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
         imageButton7.setImageResource(R.drawable.blank);
         imageButton8.setImageResource(R.drawable.blank);
         imageButton9.setImageResource(R.drawable.blank);
-        chooseFirst();
     }
 
-    @Override
-    public void chooseFirst(){
-        final AlertDialog.Builder builder  = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(false);
-        builder.setTitle(getText(R.string.setting_dialog_title));
-        builder.setMessage(getText(R.string.setting_dialog_chooseFirst));
-        builder.setPositiveButton(getText(R.string.setting_dialog_second), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                forwardInteraction.aiStart();
-            }
-        });
-        builder.setNegativeButton(getText(R.string.setting_dialog_first), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
 
-            }
-        });
-        builder.show();
-    }
+
 }

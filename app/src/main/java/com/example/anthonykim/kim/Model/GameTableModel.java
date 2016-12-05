@@ -23,6 +23,9 @@ public class GameTableModel {
 
     private GameTableModel() {}
 
+    public void setLimitTime(int limitTime) {
+        this.limitTime = limitTime;
+    }
     public int getLimitTime() {
         return limitTime;
     }

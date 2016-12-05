@@ -11,10 +11,10 @@ public interface TicTacToeContract {
         void showDialog(String text);
         void showOverlapToast();
         void resetGameTable();
-        void chooseFirst();
     }
 
     interface PublishToStatus{
+        void chooseFirst();
         void setProgressMax(int maxValue);
         void changingProgressValue(int value);
         void finishApp();
@@ -28,6 +28,7 @@ public interface TicTacToeContract {
     }
 
     interface ForwardStatusInteractionToPresenter{
+        void saveSetting(int timeLimit, boolean isFirst);
         void onResetButtonClick();
     }
 }
