@@ -9,7 +9,9 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Tap TicTacToe"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name = ".ApplicationClass"
+        >
         <activity android:name=".View.TicTacToeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

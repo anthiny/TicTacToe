@@ -11,6 +11,7 @@ import android.widget.ImageButton;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.anthonykim.kim.ApplicationClass;
 import com.example.anthonykim.kim.R;
 import com.example.anthonykim.kim.TicTacToeContract;
 

@@ -18,6 +18,8 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     private TicTacToeContract.PublishToStatus publishToStatus;
     private TicTacToe ticTacToe;
     private CountDownTimer countDownTimer;
+    private boolean timerFlag = false;
+    private int weight = 0;
 
     public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
                                TicTacToeContract.PublishToGameTable publishToGameTable){
@@ -33,6 +35,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void onGameTableItemClick(int idx) {
         if (GameTableModel.getInstance().getTotalTurn() == 9){
+            GameTableModel.getInstance().setGameStart(true);
             startTimer();
         }
         ticTacToe.inputHuman(idx);
@@ -50,6 +53,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void aiStart() {
         if (GameTableModel.getInstance().getTotalTurn() == 9){
+            GameTableModel.getInstance().setGameStart(true);
             startTimer();
         }
         ticTacToe.inputTicphago();
@@ -61,8 +65,8 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     }
 
     private void startTimer() {
+        timerFlag = true;
        countDownTimer = new CountDownTimer(GameTableModel.getInstance().getLimitTime(), 1000) {
-            int weight=0;
             @Override
             public void onTick(long millisUntilFinished) {
                 weight = weight + 1;
@@ -72,6 +76,8 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
             @Override
             public void onFinish() {
+                timerFlag = false;
+                weight = 0;
                 winPopUp("Time Over !");
                 publishToStatus.changingProgressValue(0);
                 Log.d("timer","finish");
@@ -80,8 +86,17 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
         countDownTimer.start();
     }
 
-    private void pauseTimer(){
-        countDownTimer.cancel();
+    public void pauseTimer(){
+        if (timerFlag && GameTableModel.getInstance().getGameStart()){
+            countDownTimer.cancel();
+            timerFlag = false;
+        }
+    }
+
+    public void restartTimer(){
+        if (!timerFlag && GameTableModel.getInstance().getGameStart()){
+            countDownTimer.start();
+        }
     }
 
     @Override
@@ -108,6 +123,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void winPopUp(String who) {
         pauseTimer();
+        GameTableModel.getInstance().setGameStart(false);
         publishToGameTable.showDialog(who);
     }
 
@@ -118,6 +134,10 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void onResetButtonClick() {
+        countDownTimer.cancel();
+        weight = 0;
+        GameTableModel.getInstance().setGameStart(false);
+        timerFlag = false;
         publishToGameTable.resetGameTable();
         ticTacToe.resetGameTableData();
         publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));

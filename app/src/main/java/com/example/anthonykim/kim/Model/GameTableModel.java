@@ -11,6 +11,7 @@ public class GameTableModel {
     private int userTurn = 0;
     private int totalTurn = 9;
 
+    private Boolean gameStart = false;
     private Boolean userWin = false;
     private Boolean aiWin = false;
 
@@ -22,6 +23,14 @@ public class GameTableModel {
     }
 
     private GameTableModel() {}
+
+    public Boolean getGameStart() {
+        return gameStart;
+    }
+
+    public void setGameStart(Boolean gameStart) {
+        this.gameStart = gameStart;
+    }
 
     public void setLimitTime(int limitTime) {
         this.limitTime = limitTime;
