@@ -38,20 +38,23 @@ public class TicTacToeActivity extends AppCompatActivity{
         }
         return super.onKeyDown(keyCode, event);
     }
-
+    /*
     @Override
     public void onUserLeaveHint(){
         Log.d("pause", "home button click");
         presenter.pauseTimer();
     }
+    */
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus){
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus){
+            Log.d("pause", "come back");
             presenter.restartTimer();
         }
         else{
+            Log.d("pause", "hide");
             presenter.pauseTimer();
         }
     }

@@ -17,8 +17,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     private TicTacToeContract.PublishToGameTable publishToGameTable;
     private TicTacToeContract.PublishToStatus publishToStatus;
     private TicTacToe ticTacToe;
-    private CountDownTimer countDownTimer;
-    private boolean timerFlag = false;
+    private CountDownTimer countDownTimer = null;
     private int weight = 0;
 
     public TicTacToePresenter (TicTacToeContract.PublishToStatus publishToStatus,
@@ -34,10 +33,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void onGameTableItemClick(int idx) {
-        if (GameTableModel.getInstance().getTotalTurn() == 9){
-            GameTableModel.getInstance().setGameStart(true);
-            startTimer();
-        }
         ticTacToe.inputHuman(idx);
     }
 
@@ -45,7 +40,12 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     public void saveSetting(int timeLimit, boolean isFirst) {
         GameTableModel.getInstance().setLimitTime(timeLimit * 1000);
         publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));
-        if (!isFirst){
+        if (isFirst) {
+            if (GameTableModel.getInstance().getTotalTurn() == 9){
+                startTimer();
+            }
+        }
+        else {
             aiStart();
         }
     }
@@ -53,7 +53,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void aiStart() {
         if (GameTableModel.getInstance().getTotalTurn() == 9){
-            GameTableModel.getInstance().setGameStart(true);
             startTimer();
         }
         ticTacToe.inputTicphago();
@@ -65,36 +64,39 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     }
 
     private void startTimer() {
-        timerFlag = true;
-       countDownTimer = new CountDownTimer(GameTableModel.getInstance().getLimitTime(), 1000) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                weight = weight + 1;
-                Log.d("timer", String.valueOf(GameTableModel.getInstance().getTimeProgress(weight)));
-                publishToStatus.changingProgressValue(GameTableModel.getInstance().getTimeProgress(weight));
-            }
+        if (countDownTimer == null){
+            countDownTimer = new CountDownTimer(GameTableModel.getInstance().getLimitTime(), 1000) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                    weight = weight + 1;
+                    Log.d("timer", String.valueOf(GameTableModel.getInstance().getTimeProgress(weight)));
+                    publishToStatus.changingProgressValue(GameTableModel.getInstance().getTimeProgress(weight));
+                    if (GameTableModel.getInstance().getTimeProgress(weight) <= 0){
+                        weight = 0;
+                        publishToStatus.changingProgressValue(0);
+                        countDownTimer.cancel();
+                        winPopUp("Time Over !");
+                    }
+                }
 
-            @Override
-            public void onFinish() {
-                timerFlag = false;
-                weight = 0;
-                winPopUp("Time Over !");
-                publishToStatus.changingProgressValue(0);
-                Log.d("timer","finish");
-            }
-        };
+                @Override
+                public void onFinish() {
+                    Log.d("timer","finish");
+                }
+            };
+        }
+
         countDownTimer.start();
     }
 
     public void pauseTimer(){
-        if (timerFlag && GameTableModel.getInstance().getGameStart()){
-            countDownTimer.cancel();
-            timerFlag = false;
-        }
+       if(countDownTimer != null){
+           countDownTimer.cancel();
+       }
     }
 
     public void restartTimer(){
-        if (!timerFlag && GameTableModel.getInstance().getGameStart()){
+        if(countDownTimer != null){
             countDownTimer.start();
         }
     }
@@ -123,7 +125,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     @Override
     public void winPopUp(String who) {
         pauseTimer();
-        GameTableModel.getInstance().setGameStart(false);
         publishToGameTable.showDialog(who);
     }
 
@@ -134,10 +135,8 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void onResetButtonClick() {
-        countDownTimer.cancel();
+        pauseTimer();
         weight = 0;
-        GameTableModel.getInstance().setGameStart(false);
-        timerFlag = false;
         publishToGameTable.resetGameTable();
         ticTacToe.resetGameTableData();
         publishToStatus.setProgressMax(GameTableModel.getInstance().getTimeProgress(0));

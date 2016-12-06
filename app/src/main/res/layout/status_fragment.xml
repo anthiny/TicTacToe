@@ -20,7 +20,7 @@
         style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
         android:progressDrawable="@drawable/custom_progress_bar"
         android:layout_below="@+id/guide_line"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_width="250dp"
         android:progress="0"
         android:layout_height="wrap_content"

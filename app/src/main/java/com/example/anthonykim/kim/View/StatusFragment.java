@@ -52,7 +52,6 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.status_fragment, container, false);
-
         ButterKnife.bind(this, v);
         return v;
     }

@@ -1,11 +1,12 @@
 <resources>
-    <string name="app_name">Kim</string>
+    <string name="app_name">Tap TicTacToe</string>
     <string name="setting_dialog_title">Setting</string>
     <string name="setting_dialog_chooseFirst">Choose First or Second</string>
     <string name="setting_dialog_first">First</string>
     <string name="setting_dialog_second">Second</string>
     <string name="setting_dialog_selectTimeLimit">Select Time Limit</string>
-    <string name="setting_dialog_spinnerTitle">Time Limit : </string>
+    <string name="setting_dialog_spinnerTitle">Time Limit</string>
+    <string name="setting_dialog_center"> : </string>
     <string name="setting_dialog_startButton">Start</string>
     <string name="overlap_toast">Already Clicked</string>
     <string-array name="time_table">
