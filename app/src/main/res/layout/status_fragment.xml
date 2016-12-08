@@ -15,25 +15,13 @@
         >
     </LinearLayout>
 
-    <ProgressBar
-        android:id="@+id/time_progress"
-        style="@style/Base.Widget.AppCompat.ProgressBar.Horizontal"
-        android:progressDrawable="@drawable/custom_progress_bar"
-        android:layout_below="@+id/guide_line"
-        android:layout_marginTop="30dp"
-        android:layout_width="250dp"
-        android:progress="0"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        />
-
     <Button
         android:id="@+id/reset_button"
         android:background="@drawable/rounded_button"
         android:text="@string/reset_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/time_progress"
+        android:layout_below="@+id/guide_line"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center"

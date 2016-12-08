@@ -7,12 +7,13 @@ public class GameTableModel {
     private static GameTableModel instance;
 
     private int table[] = {0,0,0,0,0,0,0,0,0};
-    private int limitTime = 30000;
     private int userTurn = 0;
     private int totalTurn = 9;
 
-    private Boolean userWin = false;
-    private Boolean aiWin = false;
+    private Boolean circleWin = false;
+    private Boolean xWin = false;
+    private Boolean singleMode = false;
+    private Boolean circleTurn = true;
 
     public static synchronized GameTableModel getInstance() {
         if (instance == null){
@@ -23,15 +24,20 @@ public class GameTableModel {
 
     private GameTableModel() {}
 
-    public void setLimitTime(int limitTime) {
-        this.limitTime = limitTime;
-    }
-    public int getLimitTime() {
-        return limitTime;
+    public Boolean getCircleTurn() {
+        return circleTurn;
     }
 
-    public int getTimeProgress(int weight){
-        return (limitTime/1000 - weight);
+    public void setCircleTurn(Boolean circleTurn) {
+        this.circleTurn = circleTurn;
+    }
+
+    public Boolean getSingleMode() {
+        return singleMode;
+    }
+
+    public void setSingleMode(Boolean singleMode) {
+        this.singleMode = singleMode;
     }
 
     public int[] getTable() {
@@ -58,28 +64,28 @@ public class GameTableModel {
         totalTurn -= 1;
     }
 
-    public Boolean getUserWin() {
-        return userWin;
+    public Boolean getCircleWin() {
+        return circleWin;
     }
 
-    public void setUserWin(Boolean userWin) {
-        this.userWin = userWin;
+    public void setCircleWin(Boolean circleWin) {
+        this.circleWin = circleWin;
     }
 
-    public Boolean getAiWin() {
-        return aiWin;
+    public Boolean getxWin() {
+        return xWin;
     }
 
-    public void setAiWin(Boolean aiWin) {
-        this.aiWin = aiWin;
+    public void setxWin(Boolean xWin) {
+        this.xWin = xWin;
     }
 
     public void resetTable(){
         for (int i = 0; i < table.length; i++){
             table[i] = 0;
         }
-        userWin = false;
-        aiWin = false;
+        circleWin = false;
+        xWin = false;
         totalTurn = 9;
         userTurn = 0;
     }

@@ -3,7 +3,6 @@ package com.example.anthonykim.kim.View;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
@@ -13,6 +12,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.example.anthonykim.kim.ApplicationClass;
+import com.example.anthonykim.kim.Model.GameTableModel;
 import com.example.anthonykim.kim.R;
 import com.example.anthonykim.kim.TicTacToeContract;
 
@@ -32,9 +32,6 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
     public void setPresenter(TicTacToeContract.ForwardStatusInteractionToPresenter forwardInteraction){
         this.forwardInteraction = forwardInteraction;
     }
-
-    @BindView(R.id.time_progress)
-    ProgressBar progressBar;
 
     @OnClick(R.id.reset_button)
     public void onResetClick(){
@@ -64,38 +61,28 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(R.layout.setting_dialog);
 
-        final Spinner s = (Spinner)dialog.findViewById(R.id.limitTimeTable);
-        final RadioGroup radioGroup = (RadioGroup)dialog.findViewById(R.id.choose);
-
-        final Button button = (Button)dialog.findViewById(R.id.startButton);
-        button.setOnClickListener(new Button.OnClickListener(){
+        final Button singlePlayButton = (Button)dialog.findViewById(R.id.singlePlay);
+        singlePlayButton.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
+                GameTableModel.getInstance().setSingleMode(true);
+                forwardInteraction.saveSetting(true);
                 dialog.dismiss();
-                switch (radioGroup.getCheckedRadioButtonId()){
-                    case R.id.optionFirst:
-                        forwardInteraction.saveSetting(Integer.parseInt(s.getSelectedItem().toString()), true);
-                        break;
 
-                    case R.id.optionSecond:
-                        forwardInteraction.saveSetting(Integer.parseInt(s.getSelectedItem().toString()), false);
-                        break;
-                }
+            }
+        });
+
+        final Button twoPlayButton = (Button)dialog.findViewById(R.id.twoPlay);
+        twoPlayButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                GameTableModel.getInstance().setSingleMode(false);
+                forwardInteraction.saveSetting(true);
+                dialog.dismiss();
 
             }
         });
         dialog.show();
-    }
-
-    @Override
-    public void setProgressMax(int maxValue) {
-        progressBar.setMax(maxValue);
-        progressBar.setProgress(maxValue);
-    }
-
-    @Override
-    public void changingProgressValue(int value) {
-        progressBar.setProgress(value);
     }
 
     @Override

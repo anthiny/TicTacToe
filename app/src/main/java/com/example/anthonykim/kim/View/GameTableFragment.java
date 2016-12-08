@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.anthonykim.kim.ApplicationClass;
+import com.example.anthonykim.kim.Model.GameTableModel;
 import com.example.anthonykim.kim.R;
 import com.example.anthonykim.kim.TicTacToeContract;
 
@@ -28,6 +28,9 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     private TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction;
     final long WaitingClickTime = 500;
     private long mLastClickTime = 0;
+    private final int CircleFlag = 1;
+    private final int XFlag = 2;
+    private final int DrawFlag = -2;
 
     public void setPresenter(TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction){
         this.forwardInteraction = forwardInteraction;
@@ -59,6 +62,10 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
+
+        if (GameTableModel.getInstance().getxWin() || GameTableModel.getInstance().getCircleWin()){
+            return;
+        }
 
         switch (v.getId()){
             case R.id.imageButton1:
@@ -179,11 +186,22 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     }
 
     @Override
-    public void showDialog(String text) {
+    public void showDialog(int who) {
+        String text = "";
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false);
+        switch (who){
+            case CircleFlag:
+                text = getString(R.string.who_circle) + getString(R.string.win_string);
+                break;
+            case XFlag:
+                text = getString(R.string.who_x) + getString(R.string.win_string);
+                break;
+            case DrawFlag:
+                text = getString(R.string.who_draw);
+                break;
+        }
         builder.setTitle(text);
-        builder.setMessage(getText(R.string.setting_dialog_chooseFirst));
         builder.setPositiveButton(getText(R.string.result_dialog_end), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

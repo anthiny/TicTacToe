@@ -12,13 +12,14 @@ import java.util.Random;
 public class TicTacToe {
 
     private TicTacToeResult ticTacToeResult;
-    private final int HumanFlag = 1;
-    private final int AiFlag = 2;
+    private final int CircleFlag = 1;
+    private final int XFlag = 2;
+    private final int DrawFlag = -2;
     private final int NotFound = -1;
     private final int Found = 99;
     public interface TicTacToeResult{
         void onGameTableChanged(int idx, int mark);
-        void winPopUp(String who);
+        void winPopUp(int who);
         void showOverlapToast();
     }
 
@@ -28,25 +29,42 @@ public class TicTacToe {
 
     public void inputHuman(int idx){
         int temp[] = GameTableModel.getInstance().getTable();
+        int flagInfo = CircleFlag;
         if (temp[idx]==0){
             Log.d("Human","Human Index: "+idx);
-            GameTableModel.getInstance().setItemValue(idx, HumanFlag);
-            ticTacToeResult.onGameTableChanged(idx, HumanFlag);
+
+            if (!GameTableModel.getInstance().getSingleMode()){
+                if (GameTableModel.getInstance().getCircleTurn()){
+                    flagInfo = CircleFlag;
+                }
+                else{
+                    flagInfo = XFlag;
+                }
+            }
+
+            GameTableModel.getInstance().setItemValue(idx, flagInfo);
+            ticTacToeResult.onGameTableChanged(idx, flagInfo);
             GameTableModel.getInstance().increaseUserTurn();
             GameTableModel.getInstance().decreaseTotalTurn();
 
             if (GameTableModel.getInstance().getUserTurn() > 2){
-                if(FindWinPoint(HumanFlag) == Found){
-                    GameTableModel.getInstance().setUserWin(true);
-                    ticTacToeResult.winPopUp("HUMAN");
+                if(FindWinPoint(flagInfo) == Found){
+                    GameTableModel.getInstance().setCircleWin(true);
+                    ticTacToeResult.winPopUp(flagInfo);
                 }
             }
 
-            if(GameTableModel.getInstance().getTotalTurn() !=0 && !GameTableModel.getInstance().getUserWin()){
-                inputTicphago();
+            if(GameTableModel.getInstance().getTotalTurn() !=0 && !GameTableModel.getInstance().getCircleWin()){
+                if (GameTableModel.getInstance().getSingleMode()){
+                    inputTicphago();
+                }
+                else{
+                    boolean currentTurn = GameTableModel.getInstance().getCircleTurn();
+                    GameTableModel.getInstance().setCircleTurn(!currentTurn);
+                }
             }
-            else if(GameTableModel.getInstance().getTotalTurn()==0 && !GameTableModel.getInstance().getUserWin()){
-                ticTacToeResult.winPopUp("DRAW");
+            else if(GameTableModel.getInstance().getTotalTurn()==0 && !GameTableModel.getInstance().getCircleWin()){
+                ticTacToeResult.winPopUp(DrawFlag);
             }
         }
         else {
@@ -55,47 +73,47 @@ public class TicTacToe {
     }
 
     public void inputTicphago(){
-        int winPoint = FindWinPoint(AiFlag);
-        int userWinPoint = FindWinPoint(HumanFlag);
+        int winPoint = FindWinPoint(XFlag);
+        int userWinPoint = FindWinPoint(CircleFlag);
         int temp[] = GameTableModel.getInstance().getTable();
         Log.d("user Win","User Win Point: "+ userWinPoint);
 
         if (winPoint != NotFound) {
-            GameTableModel.getInstance().setItemValue(winPoint, AiFlag);
-            ticTacToeResult.onGameTableChanged(winPoint, AiFlag);
+            GameTableModel.getInstance().setItemValue(winPoint, XFlag);
+            ticTacToeResult.onGameTableChanged(winPoint, XFlag);
             Log.d("AI Win","AI Win Point: "+ winPoint);
-            GameTableModel.getInstance().setAiWin(true);
+            GameTableModel.getInstance().setxWin(true);
         }
         else if (userWinPoint != NotFound){
-            temp[userWinPoint] = AiFlag;
-            GameTableModel.getInstance().setItemValue(userWinPoint, AiFlag);
-            ticTacToeResult.onGameTableChanged(userWinPoint, AiFlag);
+            temp[userWinPoint] = XFlag;
+            GameTableModel.getInstance().setItemValue(userWinPoint, XFlag);
+            ticTacToeResult.onGameTableChanged(userWinPoint, XFlag);
         }
         else{
             int tempIdx = FindEmptyEdge();
             if (tempIdx != NotFound){
-                GameTableModel.getInstance().setItemValue(tempIdx, AiFlag);
-                ticTacToeResult.onGameTableChanged(tempIdx, AiFlag);
+                GameTableModel.getInstance().setItemValue(tempIdx, XFlag);
+                ticTacToeResult.onGameTableChanged(tempIdx, XFlag);
                 Log.d("deleteEdge", "DeletedEdge is "+tempIdx);
             }
             else if (IsCoreEmpty()){
-                GameTableModel.getInstance().setItemValue(4, AiFlag);
-                ticTacToeResult.onGameTableChanged(4, AiFlag);
+                GameTableModel.getInstance().setItemValue(4, XFlag);
+                ticTacToeResult.onGameTableChanged(4, XFlag);
             }
             else
             {
                 tempIdx = FindEmptyRandomIndex();
-                GameTableModel.getInstance().setItemValue(tempIdx, AiFlag);
-                ticTacToeResult.onGameTableChanged(tempIdx, AiFlag);
+                GameTableModel.getInstance().setItemValue(tempIdx, XFlag);
+                ticTacToeResult.onGameTableChanged(tempIdx, XFlag);
             }
         }
         GameTableModel.getInstance().decreaseTotalTurn();
 
-        if (GameTableModel.getInstance().getAiWin()){
-            ticTacToeResult.winPopUp("AI");
+        if (GameTableModel.getInstance().getxWin()){
+            ticTacToeResult.winPopUp(XFlag);
         }
-        else if(!GameTableModel.getInstance().getAiWin() && GameTableModel.getInstance().getTotalTurn()==0){
-            ticTacToeResult.winPopUp("DRAW");
+        else if(!GameTableModel.getInstance().getxWin() && GameTableModel.getInstance().getTotalTurn()==0){
+            ticTacToeResult.winPopUp(DrawFlag);
         }
     }
 

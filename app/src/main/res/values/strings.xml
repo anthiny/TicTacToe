@@ -2,18 +2,11 @@
     <string name="app_name">Tap TicTacToe</string>
     <string name="setting_dialog_title">Setting</string>
     <string name="setting_dialog_chooseFirst">Choose First or Second</string>
+    <string name="setting_dialog_singlePlayer">Single</string>
+    <string name="setting_dialog_twoPlayer">Two</string>
     <string name="setting_dialog_first">First</string>
     <string name="setting_dialog_second">Second</string>
-    <string name="setting_dialog_selectTimeLimit">Select Time Limit</string>
-    <string name="setting_dialog_spinnerTitle">Time Limit</string>
-    <string name="setting_dialog_center"> : </string>
-    <string name="setting_dialog_startButton">Start</string>
     <string name="overlap_toast">Already Clicked</string>
-    <string-array name="time_table">
-        <item>10</item>
-        <item>20</item>
-        <item>30</item>
-    </string-array>
     <string name="reset_button">Reset</string>
     <string name="result_dialog_AiWin">Winner is Ticphago</string>
     <string name="result_dialog_HumanWin">Winner is Human</string>
@@ -21,5 +14,9 @@
     <string name="result_dialog_end">END</string>
     <string name="who_ai">AI</string>
     <string name="who_human">HUMAN</string>
+    <string name="who_circle">Circle Player</string>
+    <string name="who_x">X Player</string>
+    <string name="who_draw">Draw</string>
+    <string name="win_string">Win !</string>
     <string name="description">ITEM</string>
 </resources>
