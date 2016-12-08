@@ -17,7 +17,9 @@ public class ApplicationClass extends Application {
      */
     @Override
     public void onCreate() {
-        Typekit.getInstance().addNormal(Typekit.createFromAsset(this, "fonts/orange-juice-2.0.ttf"));
+        Typekit.getInstance().addNormal(Typekit.createFromAsset(this, "fonts/SeoulNamsanLongL.ttf"))
+                .add("text", Typekit.createFromAsset(this, "fonts/SeoulNamsanLongB.ttf"))
+                .add("button", Typekit.createFromAsset(this, "fonts/SeoulNamsanLongEB.ttf"));
         super.onCreate();
     }
 

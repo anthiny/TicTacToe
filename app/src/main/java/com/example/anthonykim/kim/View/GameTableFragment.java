@@ -201,7 +201,7 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
                 text = getString(R.string.who_draw);
                 break;
         }
-        builder.setTitle(text);
+        builder.setMessage(text);
         builder.setPositiveButton(getText(R.string.result_dialog_end), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

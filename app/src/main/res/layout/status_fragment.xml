@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorCyanAzure"
-    tools:context="com.example.anthonykim.kim.View.StatusFragment">
+    tools:context="com.example.anthonykim.kim.View.StatusFragment"
+    tools:ignore="missingPrefix">
     <LinearLayout
         android:id="@+id/guide_line"
         android:orientation="horizontal"
@@ -19,6 +21,7 @@
         android:id="@+id/reset_button"
         android:background="@drawable/rounded_button"
         android:text="@string/reset_button"
+        app:font="button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/guide_line"

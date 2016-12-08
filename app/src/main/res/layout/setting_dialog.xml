@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="@color/colorCyanAzure"
+    tools:ignore="missingPrefix"
+    >
 
     <Button
         android:id="@+id/singlePlay"
@@ -12,6 +17,7 @@
         android:background="@drawable/rounded_button"
         android:layout_centerHorizontal="true"
         android:text="@string/setting_dialog_singlePlayer"
+        app:font="button"
         android:layout_marginTop="20dp"
         />
 
@@ -24,6 +30,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="@string/setting_dialog_twoPlayer"
+        app:font="button"
         android:layout_marginBottom="30dp"
         />
 

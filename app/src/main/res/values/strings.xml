@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Tap TicTacToe</string>
+    <string name="action_bar_help">HELP</string>
     <string name="setting_dialog_title">Setting</string>
     <string name="setting_dialog_chooseFirst">Choose First or Second</string>
     <string name="setting_dialog_singlePlayer">Single</string>
@@ -17,6 +18,12 @@
     <string name="who_circle">Circle Player</string>
     <string name="who_x">X Player</string>
     <string name="who_draw">Draw</string>
-    <string name="win_string">Win !</string>
+    <string name="win_string"> Win !</string>
     <string name="description">ITEM</string>
+    <string name="help_dialog_contents">
+        Tic-tac-toe is a paper-and-pencil game for two players, X and O,
+        who take turns marking the spaces in a 3×3 grid.
+        The player who succeeds in placing three oftheir marks in a horizontal,
+        vertical, or diagonal row wins the game.
+    </string>
 </resources>
