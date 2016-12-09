@@ -3,9 +3,12 @@ package com.example.anthonykim.kim.View;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
@@ -54,9 +57,9 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
     }
 
     @Override
-    public void chooseFirst() {
+    public void selectGameMode() {
         final Dialog dialog = new Dialog(getActivity());
-        dialog.setTitle(getResources().getString(R.string.setting_dialog_title));
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
         dialog.setContentView(R.layout.setting_dialog);
@@ -66,7 +69,7 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
             @Override
             public void onClick(View v){
                 GameTableModel.getInstance().setSingleMode(true);
-                forwardInteraction.saveSetting(true);
+                chooseTurn();
                 dialog.dismiss();
 
             }
@@ -82,6 +85,45 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
 
             }
         });
+
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = 350;
+        params.height = 450;
+        dialog.getWindow().setAttributes(params);
+
+        dialog.show();
+    }
+
+    private void chooseTurn(){
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(R.layout.choose_turn_dialog);
+        final RadioGroup radioGroup = (RadioGroup)dialog.findViewById(R.id.radioGroup);
+        final Button playButton = (Button)dialog.findViewById(R.id.playButton);
+        playButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+
+                switch (radioGroup.getCheckedRadioButtonId()){
+                    case R.id.radioFirst:
+                        forwardInteraction.saveSetting(true);
+                        break;
+                    case R.id.radioSecond:
+                        forwardInteraction.saveSetting(false);
+                        break;
+                }
+                dialog.dismiss();
+
+            }
+        });
+
+        WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
+        params.width = 350;
+        params.height = 450;
+        dialog.getWindow().setAttributes(params);
+
         dialog.show();
     }
 

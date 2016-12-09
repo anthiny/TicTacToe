@@ -10,15 +10,26 @@
     tools:ignore="missingPrefix"
     >
 
+    <TextView
+        android:id="@+id/settingTittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="Select Game Mode"
+        app:font="text"
+        />
+
     <Button
         android:id="@+id/singlePlay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/settingTittle"
         android:background="@drawable/rounded_button"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
         android:text="@string/setting_dialog_singlePlayer"
         app:font="button"
-        android:layout_marginTop="20dp"
         />
 
     <Button
@@ -31,7 +42,6 @@
         android:layout_marginTop="20dp"
         android:text="@string/setting_dialog_twoPlayer"
         app:font="button"
-        android:layout_marginBottom="30dp"
         />
 
 </RelativeLayout>

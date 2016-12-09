@@ -14,7 +14,7 @@ public interface TicTacToeContract {
     }
 
     interface PublishToStatus{
-        void chooseFirst();
+        void selectGameMode();
         void finishApp();
     }
 

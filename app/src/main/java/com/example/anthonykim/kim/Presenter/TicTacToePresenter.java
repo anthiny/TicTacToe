@@ -44,7 +44,7 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     }
 
     private void prepareFirstGame(){
-        publishToStatus.chooseFirst();
+        publishToStatus.selectGameMode();
     }
 
     @Override
@@ -82,6 +82,6 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     public void onResetButtonClick() {
         publishToGameTable.resetGameTable();
         ticTacToe.resetGameTableData();
-        publishToStatus.chooseFirst();
+        publishToStatus.selectGameMode();
     }
 }

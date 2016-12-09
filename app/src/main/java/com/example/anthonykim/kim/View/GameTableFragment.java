@@ -192,10 +192,10 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
         builder.setCancelable(false);
         switch (who){
             case CircleFlag:
-                text = getString(R.string.who_circle) + getString(R.string.win_string);
+                text = getString(R.string.win_circlelayer);
                 break;
             case XFlag:
-                text = getString(R.string.who_x) + getString(R.string.win_string);
+                text = getString(R.string.win_xplayer);
                 break;
             case DrawFlag:
                 text = getString(R.string.who_draw);
