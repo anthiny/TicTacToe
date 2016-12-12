@@ -226,7 +226,7 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
         });
         WindowManager.LayoutParams params = new WindowManager.LayoutParams();
         params.copyFrom(dialog.getWindow().getAttributes());
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.width = 500;
         params.height = 300;
         dialog.getWindow().setAttributes(params);
         dialog.show();

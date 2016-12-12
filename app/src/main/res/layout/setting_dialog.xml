@@ -17,6 +17,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:text="Select Game Mode"
+        android:textSize="15sp"
         app:font="text"
         />
 
