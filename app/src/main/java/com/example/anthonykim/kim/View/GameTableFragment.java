@@ -1,14 +1,21 @@
 package com.example.anthonykim.kim.View;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anthonykim.kim.R;
@@ -183,8 +190,6 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     @Override
     public void showDialog(int who) {
         String text = "";
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setCancelable(false);
         switch (who){
             case CircleFlag:
                 text = getString(R.string.win_circlelayer);
@@ -196,20 +201,35 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
                 text = getString(R.string.who_draw);
                 break;
         }
-        builder.setMessage(text);
-        builder.setPositiveButton(getText(R.string.result_dialog_end), new DialogInterface.OnClickListener() {
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setContentView(R.layout.result_dialog);
+        final TextView textView = (TextView)dialog.findViewById(R.id.result_title);
+        textView.setText(text);
+        final Button continueButton = (Button)dialog.findViewById(R.id.continue_button);
+        continueButton.setOnClickListener(new Button.OnClickListener(){
             @Override
-            public void onClick(DialogInterface dialog, int which) {
+            public void onClick(View v){
+                forwardInteraction.onDialogContinueClick();
+                dialog.dismiss();
+            }
+        });
+        final Button endButton = (Button)dialog.findViewById(R.id.end_button);
+        endButton.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                dialog.dismiss();
                 forwardInteraction.onDialogEndClick();
             }
         });
-        builder.setNegativeButton(getText(R.string.result_dialog_continue), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                forwardInteraction.onDialogContinueClick();
-            }
-        });
-        builder.show();
+        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
+        params.copyFrom(dialog.getWindow().getAttributes());
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        params.height = 300;
+        dialog.getWindow().setAttributes(params);
+        dialog.show();
     }
 
     @Override
