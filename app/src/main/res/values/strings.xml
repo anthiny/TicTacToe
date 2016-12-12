@@ -24,9 +24,9 @@
     <string name="win_circlelayer">O Player Win !</string>
     <string name="description">ITEM</string>
     <string name="help_dialog_contents">
-         Tic-tac-toe is a paper-and-pencil game for two players, X and O,
-        who take turns marking the spaces in a 3×3 grid.\n
-        The player who succeeds in placing three of their marks in a horizontal,
-        vertical, or diagonal row wins the game.
+        &#160;&#160;Tic-tac-toe is a paper-and-pencil game for two players, X and O, who take turns marking the spaces in a 3×3 grid.
+        \n\n
+        &#160;The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
     </string>
+    <string name="banner_ad_unit_id_choice">ca-app-pub-7351136581313835/4867352104</string>
 </resources>

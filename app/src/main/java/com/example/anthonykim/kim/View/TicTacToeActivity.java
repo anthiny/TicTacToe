@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.anthonykim.kim.Presenter.TicTacToePresenter;
 import com.example.anthonykim.kim.R;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.tsengvn.typekit.TypekitContextWrapper;
 import android.content.Context;
 import android.view.Menu;
@@ -13,6 +16,7 @@ import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.RelativeLayout;
 
 /**
  * Created by anthony on 2016. 11. 29..
@@ -33,6 +37,10 @@ public class TicTacToeActivity extends AppCompatActivity{
         presenter = new TicTacToePresenter(statusFragment, gameTableFragment);
         gameTableFragment.setPresenter(presenter);
         statusFragment.setPresenter(presenter);
+
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().addTestDevice("4DDF2F8B72F6691D240114A7CC6FD2D6").build();
+        mAdView.loadAd(adRequest);
     }
 
     @Override

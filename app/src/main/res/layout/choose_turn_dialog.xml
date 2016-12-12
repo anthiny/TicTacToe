@@ -24,6 +24,7 @@
         android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
+        android:checkedButton="@+id/radioFirst"
         >
 
         <RadioButton

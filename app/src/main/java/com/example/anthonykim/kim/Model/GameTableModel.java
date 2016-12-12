@@ -15,6 +15,8 @@ public class GameTableModel {
     private Boolean singleMode = false;
     private Boolean circleTurn = true;
 
+    private Boolean lockGameTable = true;
+
     public static synchronized GameTableModel getInstance() {
         if (instance == null){
             instance = new GameTableModel();
@@ -23,6 +25,14 @@ public class GameTableModel {
     }
 
     private GameTableModel() {}
+
+    public Boolean getLockGameTable() {
+        return lockGameTable;
+    }
+
+    public void setLockGameTable(Boolean lockGameTable) {
+        this.lockGameTable = lockGameTable;
+    }
 
     public Boolean getCircleTurn() {
         return circleTurn;

@@ -3,23 +3,24 @@ package com.example.anthonykim.kim.View;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.anthonykim.kim.ApplicationClass;
 import com.example.anthonykim.kim.Model.GameTableModel;
 import com.example.anthonykim.kim.R;
 import com.example.anthonykim.kim.TicTacToeContract;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 

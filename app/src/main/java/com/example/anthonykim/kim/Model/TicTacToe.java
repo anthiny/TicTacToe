@@ -50,6 +50,7 @@ public class TicTacToe {
             if (GameTableModel.getInstance().getUserTurn() > 2){
                 if(FindWinPoint(flagInfo) == Found){
                     GameTableModel.getInstance().setCircleWin(true);
+                    GameTableModel.getInstance().setLockGameTable(true);
                     ticTacToeResult.winPopUp(flagInfo);
                 }
             }
@@ -64,6 +65,7 @@ public class TicTacToe {
                 }
             }
             else if(GameTableModel.getInstance().getTotalTurn()==0 && !GameTableModel.getInstance().getCircleWin()){
+                GameTableModel.getInstance().setLockGameTable(true);
                 ticTacToeResult.winPopUp(DrawFlag);
             }
         }
@@ -110,9 +112,11 @@ public class TicTacToe {
         GameTableModel.getInstance().decreaseTotalTurn();
 
         if (GameTableModel.getInstance().getxWin()){
+            GameTableModel.getInstance().setLockGameTable(true);
             ticTacToeResult.winPopUp(XFlag);
         }
         else if(!GameTableModel.getInstance().getxWin() && GameTableModel.getInstance().getTotalTurn()==0){
+            GameTableModel.getInstance().setLockGameTable(true);
             ticTacToeResult.winPopUp(DrawFlag);
         }
     }
@@ -249,6 +253,8 @@ public class TicTacToe {
     }
 
     public void resetGameTableData(){
+        GameTableModel.getInstance().setxWin(false);
+        GameTableModel.getInstance().setCircleWin(false);
         GameTableModel.getInstance().resetTable();
     }
 

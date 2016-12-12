@@ -1,5 +1,7 @@
 package com.example.anthonykim.kim.Presenter;
 
+import android.util.Log;
+
 import com.example.anthonykim.kim.Model.GameTableModel;
 import com.example.anthonykim.kim.Model.TicTacToe;
 import com.example.anthonykim.kim.TicTacToeContract;
@@ -28,12 +30,16 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
 
     @Override
     public void onGameTableItemClick(int idx) {
+        if(GameTableModel.getInstance().getLockGameTable()){
+            return;
+        }
         ticTacToe.inputHuman(idx);
     }
 
     @Override
     public void saveSetting(boolean isFirst) {
-       if (GameTableModel.getInstance().getSingleMode() && !isFirst){
+        GameTableModel.getInstance().setLockGameTable(false);
+        if (GameTableModel.getInstance().getSingleMode() && !isFirst){
            aiStart();
        }
     }

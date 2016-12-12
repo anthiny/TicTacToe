@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.example.anthonykim.kim.Model.GameTableModel;
 import com.example.anthonykim.kim.R;
 import com.example.anthonykim.kim.TicTacToeContract;
 
@@ -62,10 +61,6 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
             return;
         }
         mLastClickTime = SystemClock.elapsedRealtime();
-
-        if (GameTableModel.getInstance().getxWin() || GameTableModel.getInstance().getCircleWin()){
-            return;
-        }
 
         switch (v.getId()){
             case R.id.imageButton1:
