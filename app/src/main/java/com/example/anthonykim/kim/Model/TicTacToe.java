@@ -27,6 +27,46 @@ public class TicTacToe {
         this.ticTacToeResult = ticTacToeResult;
     }
 
+    private void multiple(int idx){
+        int flagInfo;
+
+        if (GameTableModel.getInstance().getCircleTurn()){
+            flagInfo = CircleFlag;
+        }
+        else{
+            flagInfo = XFlag;
+        }
+
+        GameTableModel.getInstance().setItemValue(idx, flagInfo);
+        ticTacToeResult.onGameTableChanged(idx, flagInfo);
+        GameTableModel.getInstance().decreaseTotalTurn();
+
+        if (GameTableModel.getInstance().getTotalTurn() < 5){
+            if(IsWin(flagInfo)){
+                switch (flagInfo){
+                    case CircleFlag:
+                        GameTableModel.getInstance().setCircleWin(true);
+                        break;
+                    case XFlag:
+                        GameTableModel.getInstance().setxWin(true);
+                        break;
+                }
+                GameTableModel.getInstance().setLockGameTable(true);
+                ticTacToeResult.winPopUp(flagInfo);
+                return;
+            }
+            else if (GameTableModel.getInstance().getTotalTurn() == 0 && !GameTableModel.getInstance().getCircleWin()
+                    && !GameTableModel.getInstance().getxWin()){
+                GameTableModel.getInstance().setLockGameTable(true);
+                ticTacToeResult.winPopUp(DrawFlag);
+                return;
+            }
+        }
+
+        boolean currentTurn = GameTableModel.getInstance().getCircleTurn();
+        GameTableModel.getInstance().setCircleTurn(!currentTurn);
+    }
+
     public void inputHuman(int idx){
         int temp[] = GameTableModel.getInstance().getTable();
         int flagInfo = CircleFlag;
@@ -34,12 +74,8 @@ public class TicTacToe {
             Log.d("Human","Human Index: "+idx);
 
             if (!GameTableModel.getInstance().getSingleMode()){
-                if (GameTableModel.getInstance().getCircleTurn()){
-                    flagInfo = CircleFlag;
-                }
-                else{
-                    flagInfo = XFlag;
-                }
+                multiple(idx);
+                return;
             }
 
             GameTableModel.getInstance().setItemValue(idx, flagInfo);
@@ -56,13 +92,7 @@ public class TicTacToe {
             }
 
             if(GameTableModel.getInstance().getTotalTurn() !=0 && !GameTableModel.getInstance().getCircleWin()){
-                if (GameTableModel.getInstance().getSingleMode()){
-                    inputTicphago();
-                }
-                else{
-                    boolean currentTurn = GameTableModel.getInstance().getCircleTurn();
-                    GameTableModel.getInstance().setCircleTurn(!currentTurn);
-                }
+                inputTicphago();
             }
             else if(GameTableModel.getInstance().getTotalTurn()==0 && !GameTableModel.getInstance().getCircleWin()){
                 GameTableModel.getInstance().setLockGameTable(true);
@@ -121,9 +151,77 @@ public class TicTacToe {
         }
     }
 
-    public int FindWinPoint(int whoFlag){
+    private boolean IsWin(int flag){
         int cnt = 0;
-        int temp[] =  GameTableModel.getInstance().getTable();
+        int temp[] = GameTableModel.getInstance().getTable();
+        int index;
+
+        for(int i =0;i<3;i++){
+            for(int j=0;j<3;j++){
+                index = i*3+j;
+                if(temp[index] == flag) {
+                    cnt++;
+                }
+                else{
+                    cnt--;
+                }
+            }
+            if(cnt == 3){
+                return true;
+            }
+            else{
+                cnt = 0;
+            }
+        }
+
+        for(int i =0;i<3;i++){
+            for(int j=0;j<3;j++){
+                index = i+j*3;
+                if(temp[index]==flag){
+                    cnt++;
+                }
+                else{
+                    cnt--;
+                }
+            }
+           if(cnt == 3){
+                return true;
+            }
+            else{
+                cnt = 0;
+            }
+        }
+
+        int weight = 4;
+        for(int i =0;i<2;i++){
+            for(int j=0;j<3;j++){
+
+                if (i == 1)
+                    weight = 2;
+
+                index = i*2+j*weight;
+
+                if(temp[index]==flag){
+                    cnt++;
+                }
+                else{
+                    cnt--;
+                }
+            }
+            if(cnt == 3){
+                return true;
+            }
+            else{
+                cnt = 0;
+            }
+        }
+
+        return false;
+    }
+
+    private int FindWinPoint(int whoFlag){
+        int cnt = 0;
+        int temp[] = GameTableModel.getInstance().getTable();
         int tempEmptyIndex = NotFound;
         int index;
 
@@ -208,15 +306,16 @@ public class TicTacToe {
         return NotFound;
     }
 
-    public boolean IsCoreEmpty(){
+    private boolean IsCoreEmpty(){
         int temp[] = GameTableModel.getInstance().getTable();
+
         if (temp[4] != 0)
             return false;
-
-        return true;
+        else
+            return true;
     }
 
-    public int FindEmptyRandomIndex(){
+    private int FindEmptyRandomIndex(){
         Random rand= new Random();
         int randIndex;
         int temp[] = GameTableModel.getInstance().getTable();
@@ -231,7 +330,7 @@ public class TicTacToe {
         return emptyIdxs.get(randIndex);
     }
 
-    public int FindEmptyEdge(){
+    private int FindEmptyEdge(){
         Random rand= new Random();
         int randIndex;
         int temp[] = GameTableModel.getInstance().getTable();
@@ -253,6 +352,7 @@ public class TicTacToe {
     }
 
     public void resetGameTableData(){
+        GameTableModel.getInstance().setCircleTurn(true);
         GameTableModel.getInstance().setxWin(false);
         GameTableModel.getInstance().setCircleWin(false);
         GameTableModel.getInstance().resetTable();
