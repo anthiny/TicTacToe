@@ -1,6 +1,7 @@
 package com.example.anthonykim.kim.View;
 
 import android.app.Dialog;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -28,6 +29,7 @@ public class TicTacToeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_tictactoe);
         GameTableFragment gameTableFragment =
                 (GameTableFragment) getSupportFragmentManager().findFragmentById(R.id.frag_game_table);

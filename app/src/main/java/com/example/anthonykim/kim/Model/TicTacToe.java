@@ -71,7 +71,7 @@ public class TicTacToe {
         int temp[] = GameTableModel.getInstance().getTable();
         int flagInfo = CircleFlag;
         if (temp[idx]==0){
-            Log.d("Human","Human Index: "+idx);
+            //Log.d("Human","Human Index: "+idx);
 
             if (!GameTableModel.getInstance().getSingleMode()){
                 multiple(idx);
@@ -108,12 +108,12 @@ public class TicTacToe {
         int winPoint = FindWinPoint(XFlag);
         int userWinPoint = FindWinPoint(CircleFlag);
         int temp[] = GameTableModel.getInstance().getTable();
-        Log.d("user Win","User Win Point: "+ userWinPoint);
+        //Log.d("user Win","User Win Point: "+ userWinPoint);
 
         if (winPoint != NotFound) {
             GameTableModel.getInstance().setItemValue(winPoint, XFlag);
             ticTacToeResult.onGameTableChanged(winPoint, XFlag);
-            Log.d("AI Win","AI Win Point: "+ winPoint);
+            //Log.d("AI Win","AI Win Point: "+ winPoint);
             GameTableModel.getInstance().setxWin(true);
         }
         else if (userWinPoint != NotFound){
@@ -126,7 +126,7 @@ public class TicTacToe {
             if (tempIdx != NotFound){
                 GameTableModel.getInstance().setItemValue(tempIdx, XFlag);
                 ticTacToeResult.onGameTableChanged(tempIdx, XFlag);
-                Log.d("deleteEdge", "DeletedEdge is "+tempIdx);
+                //Log.d("deleteEdge", "DeletedEdge is "+tempIdx);
             }
             else if (IsCoreEmpty()){
                 GameTableModel.getInstance().setItemValue(4, XFlag);
@@ -326,7 +326,7 @@ public class TicTacToe {
             }
         }
         randIndex = rand.nextInt(emptyIdxs.size());
-        Log.d("FindRand","FindRand Index: "+emptyIdxs.get(randIndex));
+        //Log.d("FindRand","FindRand Index: "+emptyIdxs.get(randIndex));
         return emptyIdxs.get(randIndex);
     }
 
