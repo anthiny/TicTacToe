@@ -41,7 +41,9 @@ public class TicTacToeActivity extends AppCompatActivity{
         statusFragment.setPresenter(presenter);
 
         AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().addTestDevice("4DDF2F8B72F6691D240114A7CC6FD2D6").build();
+        AdRequest adRequest = new AdRequest.Builder().
+                //addTestDevice("4DDF2F8B72F6691D240114A7CC6FD2D6").
+                build();
         mAdView.loadAd(adRequest);
     }
 

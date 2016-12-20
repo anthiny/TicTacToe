@@ -2,6 +2,7 @@ package com.example.anthonykim.kim.View;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Rect;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -34,9 +35,9 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
     private TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction;
     final long WaitingClickTime = 500;
     private long mLastClickTime = 0;
-    private final int CircleFlag = 1;
-    private final int XFlag = 2;
-    private final int DrawFlag = -2;
+    final int CircleFlag = 1;
+    final int XFlag = 2;
+    final int DrawFlag = -2;
 
     public void setPresenter(TicTacToeContract.ForwardGameTableInteractionToPresenter forwardInteraction){
         this.forwardInteraction = forwardInteraction;
@@ -224,11 +225,7 @@ public class GameTableFragment extends Fragment implements TicTacToeContract.Pub
                 forwardInteraction.onDialogEndClick();
             }
         });
-        WindowManager.LayoutParams params = new WindowManager.LayoutParams();
-        params.copyFrom(dialog.getWindow().getAttributes());
-        params.width = 500;
-        params.height = 300;
-        dialog.getWindow().setAttributes(params);
+
         dialog.show();
     }
 

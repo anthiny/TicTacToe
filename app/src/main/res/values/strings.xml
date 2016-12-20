@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">Tap TicTacToe</string>
     <string name="action_bar_help">HELP</string>
-    <string name="setting_dialog_title">Setting</string>
-    <string name="setting_dialog_chooseFirst">Choose First or Second</string>
+    <string name="setting_dialog_title">Select Game Mode</string>
     <string name="setting_dialog_singlePlayer">Single</string>
     <string name="setting_dialog_twoPlayer">Two</string>
     <string name="choose_dialog_title">Choose Your Turn</string>
