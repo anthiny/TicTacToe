@@ -1,4 +1,4 @@
-package com.example.anthonykim.kim;
+package com.AnA.anthonykim.kim;
 
 import org.junit.Test;
 

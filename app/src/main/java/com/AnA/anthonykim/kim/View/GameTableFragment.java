@@ -1,26 +1,20 @@
-package com.example.anthonykim.kim.View;
+package com.AnA.anthonykim.kim.View;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
-import android.graphics.Rect;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.anthonykim.kim.R;
-import com.example.anthonykim.kim.TicTacToeContract;
+import com.AnA.anthonykim.kim.R;
+import com.AnA.anthonykim.kim.TicTacToeContract;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

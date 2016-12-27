@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.anthonykim.kim.View.TicTacToeActivity"
+    tools:context="com.AnA.anthonykim.kim.View.TicTacToeActivity"
     >
 
     <fragment
@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="360dp"
-        android:name="com.example.anthonykim.kim.View.GameTableFragment"
+        android:name="com.AnA.anthonykim.kim.View.GameTableFragment"
         tools:layout="@layout/game_table_fragment"
         />
 
@@ -22,7 +22,7 @@
         android:id="@+id/frag_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.example.anthonykim.kim.View.StatusFragment"
+        android:name="com.AnA.anthonykim.kim.View.StatusFragment"
         tools:layout="@layout/status_fragment"
         android:layout_below="@+id/frag_game_table"
         />

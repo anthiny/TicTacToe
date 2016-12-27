@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorCyanAzure"
-    tools:context="com.example.anthonykim.kim.View.StatusFragment"
+    tools:context="com.AnA.anthonykim.kim.View.StatusFragment"
     tools:ignore="missingPrefix">
     <LinearLayout
         android:id="@+id/guide_line"

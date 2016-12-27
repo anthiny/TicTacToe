@@ -1,4 +1,4 @@
-package com.example.anthonykim.kim;
+package com.AnA.anthonykim.kim;
 
 /**
  * Created by anthony on 2016. 11. 29..

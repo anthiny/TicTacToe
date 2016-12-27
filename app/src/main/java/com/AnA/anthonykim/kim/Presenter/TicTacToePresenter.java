@@ -1,10 +1,8 @@
-package com.example.anthonykim.kim.Presenter;
+package com.AnA.anthonykim.kim.Presenter;
 
-import android.util.Log;
-
-import com.example.anthonykim.kim.Model.GameTableModel;
-import com.example.anthonykim.kim.Model.TicTacToe;
-import com.example.anthonykim.kim.TicTacToeContract;
+import com.AnA.anthonykim.kim.Model.GameTableModel;
+import com.AnA.anthonykim.kim.Model.TicTacToe;
+import com.AnA.anthonykim.kim.TicTacToeContract;
 
 /**
  * Created by anthony on 2016. 11. 29..

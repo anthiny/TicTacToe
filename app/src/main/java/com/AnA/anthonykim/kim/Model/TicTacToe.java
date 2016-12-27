@@ -1,6 +1,5 @@
-package com.example.anthonykim.kim.Model;
+package com.AnA.anthonykim.kim.Model;
 
-import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

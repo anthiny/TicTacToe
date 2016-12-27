@@ -1,4 +1,4 @@
-package com.example.anthonykim.kim;
+package com.AnA.anthonykim.kim;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

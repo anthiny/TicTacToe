@@ -1,21 +1,19 @@
-package com.example.anthonykim.kim.View;
+package com.AnA.anthonykim.kim.View;
 
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RadioGroup;
 
-import com.example.anthonykim.kim.ApplicationClass;
-import com.example.anthonykim.kim.Model.GameTableModel;
-import com.example.anthonykim.kim.R;
-import com.example.anthonykim.kim.TicTacToeContract;
+import com.AnA.anthonykim.kim.ApplicationClass;
+import com.AnA.anthonykim.kim.Model.GameTableModel;
+import com.AnA.anthonykim.kim.R;
+import com.AnA.anthonykim.kim.TicTacToeContract;
 
 
 import butterknife.ButterKnife;

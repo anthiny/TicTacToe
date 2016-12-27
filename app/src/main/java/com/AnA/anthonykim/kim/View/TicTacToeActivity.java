@@ -1,14 +1,13 @@
-package com.example.anthonykim.kim.View;
+package com.AnA.anthonykim.kim.View;
 
 import android.app.Dialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.anthonykim.kim.Presenter.TicTacToePresenter;
-import com.example.anthonykim.kim.R;
+import com.AnA.anthonykim.kim.Presenter.TicTacToePresenter;
+import com.AnA.anthonykim.kim.R;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.tsengvn.typekit.TypekitContextWrapper;
 import android.content.Context;
@@ -17,7 +16,6 @@ import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
-import android.widget.RelativeLayout;
 
 /**
  * Created by anthony on 2016. 11. 29..
