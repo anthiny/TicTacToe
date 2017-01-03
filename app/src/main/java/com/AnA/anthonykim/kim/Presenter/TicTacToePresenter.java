@@ -35,9 +35,19 @@ public class TicTacToePresenter implements TicTacToeContract.ForwardStatusIntera
     }
 
     @Override
-    public void saveSetting(boolean isFirst) {
+    public void setSingleMode(boolean value) {
+        GameTableModel.getInstance().setSingleMode(value);
+    }
+
+    @Override
+    public void setHumanFirst(boolean value) {
+        GameTableModel.getInstance().setFirstTurn(value);
+    }
+
+    @Override
+    public void saveSetting() {
         GameTableModel.getInstance().setLockGameTable(false);
-        if (GameTableModel.getInstance().getSingleMode() && !isFirst){
+        if (GameTableModel.getInstance().getSingleMode() && !GameTableModel.getInstance().getFirstTurn()){
            aiStart();
        }
     }

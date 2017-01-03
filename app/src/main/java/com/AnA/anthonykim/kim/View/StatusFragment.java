@@ -58,65 +58,29 @@ public class StatusFragment extends Fragment implements TicTacToeContract.Publis
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setCanceledOnTouchOutside(false);
-        dialog.setContentView(R.layout.setting_dialog);
+        dialog.setContentView(R.layout.game_mode_dialog);
 
         final Button singlePlayButton = (Button)dialog.findViewById(R.id.singlePlay);
         singlePlayButton.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
-                GameTableModel.getInstance().setSingleMode(true);
-                chooseTurn();
+                forwardInteraction.setSingleMode(true);
+                forwardInteraction.saveSetting();
                 dialog.dismiss();
 
             }
         });
-
         final Button twoPlayButton = (Button)dialog.findViewById(R.id.twoPlay);
         twoPlayButton.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View v){
-                GameTableModel.getInstance().setSingleMode(false);
-                forwardInteraction.saveSetting(true);
+                forwardInteraction.setSingleMode(false);
+                forwardInteraction.saveSetting();
                 dialog.dismiss();
 
             }
         });
-
-        /*WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
-        params.width = 350;
-        params.height = 450;
-        dialog.getWindow().setAttributes(params);*/
-
         dialog.show();
-    }
-
-    private void chooseTurn(){
-        final Dialog dialog = new Dialog(getActivity());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setCanceledOnTouchOutside(false);
-        dialog.setContentView(R.layout.choose_turn_dialog);
-        final RadioGroup radioGroup = (RadioGroup)dialog.findViewById(R.id.radioGroup);
-        final Button playButton = (Button)dialog.findViewById(R.id.playButton);
-        playButton.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View v){
-
-                switch (radioGroup.getCheckedRadioButtonId()){
-                    case R.id.radioFirst:
-                        forwardInteraction.saveSetting(true);
-                        break;
-                    case R.id.radioSecond:
-                        forwardInteraction.saveSetting(false);
-                        break;
-                }
-                dialog.dismiss();
-
-            }
-        });
-
-        dialog.show();
-
     }
 
     @Override

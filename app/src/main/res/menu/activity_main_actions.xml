@@ -7,4 +7,9 @@
         app:showAsAction="always"
         />
 
+    <item android:id="@+id/action_option"
+        android:title="@string/action_bar_option"
+        app:showAsAction="always"
+        />
+
 </menu>

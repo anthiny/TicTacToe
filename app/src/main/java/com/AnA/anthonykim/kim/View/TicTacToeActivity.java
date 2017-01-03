@@ -13,7 +13,11 @@ import android.view.Menu;
 import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
+import android.widget.RadioGroup;
+
 import com.inmobi.ads.*;
 import com.inmobi.sdk.*;
 
@@ -55,12 +59,36 @@ public class TicTacToeActivity extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item){
         switch (item.getItemId()){
             case R.id.action_help:
-                final Dialog dialog = new Dialog(this);
-                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                dialog.setContentView(R.layout.help_dialog);
-                dialog.setCancelable(true);
-                dialog.setCanceledOnTouchOutside(true);
-                dialog.show();
+                final Dialog helpDialog = new Dialog(this);
+                helpDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                helpDialog.setContentView(R.layout.help_dialog);
+                helpDialog.setCancelable(true);
+                helpDialog.setCanceledOnTouchOutside(true);
+                helpDialog.show();
+                return true;
+            case R.id.action_option:
+                final Dialog optionDialog = new Dialog(this);
+                optionDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                optionDialog.setCancelable(false);
+                optionDialog.setCanceledOnTouchOutside(false);
+                optionDialog.setContentView(R.layout.option_dialog);
+                final RadioGroup radioGroup = (RadioGroup)optionDialog.findViewById(R.id.radioGroup);
+                final Button playButton = (Button)optionDialog.findViewById(R.id.playButton);
+                playButton.setOnClickListener(new Button.OnClickListener(){
+                    @Override
+                    public void onClick(View v){
+                        switch (radioGroup.getCheckedRadioButtonId()){
+                            case R.id.radioFirst:
+                                presenter.setHumanFirst(true);
+                                break;
+                            case R.id.radioSecond:
+                                presenter.setHumanFirst(false);
+                                break;
+                        }
+                        optionDialog.dismiss();
+                    }
+                });
+                optionDialog.show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -78,7 +106,6 @@ public class TicTacToeActivity extends AppCompatActivity{
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(TypekitContextWrapper.wrap(newBase));
-
     }
 
 }

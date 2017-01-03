@@ -14,6 +14,7 @@ public class GameTableModel {
     private Boolean xWin = false;
     private Boolean singleMode = false;
     private Boolean circleTurn = true;
+    private Boolean firstTurn = true;
 
     private Boolean lockGameTable = true;
 
@@ -25,6 +26,14 @@ public class GameTableModel {
     }
 
     private GameTableModel() {}
+
+    public Boolean getFirstTurn() {
+        return firstTurn;
+    }
+
+    public void setFirstTurn(Boolean firstTurn) {
+        this.firstTurn = firstTurn;
+    }
 
     public Boolean getLockGameTable() {
         return lockGameTable;
