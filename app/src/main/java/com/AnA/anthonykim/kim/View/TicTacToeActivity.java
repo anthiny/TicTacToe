@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.AnA.anthonykim.kim.Presenter.TicTacToePresenter;
 import com.AnA.anthonykim.kim.R;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.tsengvn.typekit.TypekitContextWrapper;
 import android.content.Context;
 import android.view.Menu;
@@ -16,6 +14,8 @@ import android.view.KeyEvent;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.Window;
+import com.inmobi.ads.*;
+import com.inmobi.sdk.*;
 
 /**
  * Created by anthony on 2016. 11. 29..
@@ -27,6 +27,8 @@ public class TicTacToeActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        InMobiSdk.init(this, "41e93ce89c6543c998ee818dbeca425e");
+        InMobiSdk.setLogLevel(InMobiSdk.LogLevel.DEBUG);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_tictactoe);
         GameTableFragment gameTableFragment =
@@ -37,12 +39,9 @@ public class TicTacToeActivity extends AppCompatActivity{
         presenter = new TicTacToePresenter(statusFragment, gameTableFragment);
         gameTableFragment.setPresenter(presenter);
         statusFragment.setPresenter(presenter);
+        InMobiBanner banner = (InMobiBanner)findViewById(R.id.banner);
+        banner.load();
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().
-                //addTestDevice("4DDF2F8B72F6691D240114A7CC6FD2D6").
-                build();
-        mAdView.loadAd(adRequest);
     }
 
     @Override
