@@ -6,17 +6,15 @@
 * Used Skills
   * MVP Pattern
     * Why ?
-      1. 
-      2. 
-      3.
+      1. a
+      2. b
+      3. c
     * About MVP
-      *
   * Typekit
     * For easy to using cumstom font
   * Butter Knife
     * It is a useful library to reduce the work of View declaration, connection, and linking listener in Android development
     * ([http://jakewharton.github.io/butterknife](http://jakewharton.github.io/butterknife/))
  * Third Party
-   * InMobi
-     * To add banner AD
+   * InMobi: To add banner AD
    
