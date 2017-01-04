@@ -15,6 +15,6 @@
   * Butter Knife
     * It is a useful library to reduce the work of View declaration, connection, and linking listener in Android development
     * ([http://jakewharton.github.io/butterknife](http://jakewharton.github.io/butterknife/))
- * Third Party
-   * InMobi: To add banner AD
+* Third Party
+  * InMobi: To add banner AD
    
