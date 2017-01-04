@@ -5,9 +5,18 @@
   marks in a horizontal, vertical, or diagonal row wins the game.
 * Used Skills
   * MVP Pattern
-    * 
+    * Why ?
+      1. 
+      2. 
+      3.
+    * About MVP
+      *
   * Typekit
     * For easy to using cumstom font
   * Butter Knife
     * It is a useful library to reduce the work of View declaration, connection, and linking listener in Android development
     * ([http://jakewharton.github.io/butterknife](http://jakewharton.github.io/butterknife/))
+ * Third Party
+   * InMobi
+     * To add banner AD
+   
