@@ -73,6 +73,14 @@ public class TicTacToeActivity extends AppCompatActivity{
                 optionDialog.setCanceledOnTouchOutside(false);
                 optionDialog.setContentView(R.layout.option_dialog);
                 final RadioGroup radioGroup = (RadioGroup)optionDialog.findViewById(R.id.radioGroup);
+
+                if (presenter.getHumanFirst()){
+                    radioGroup.check(R.id.radioFirst);
+                }
+                else{
+                    radioGroup.check(R.id.radioSecond);
+                }
+
                 final Button playButton = (Button)optionDialog.findViewById(R.id.playButton);
                 playButton.setOnClickListener(new Button.OnClickListener(){
                     @Override

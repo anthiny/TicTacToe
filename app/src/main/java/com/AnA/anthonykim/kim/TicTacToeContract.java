@@ -28,6 +28,7 @@ public interface TicTacToeContract {
     interface ForwardStatusInteractionToPresenter{
         void setSingleMode(boolean value);
         void setHumanFirst(boolean value);
+        Boolean getHumanFirst();
         void saveSetting();
         void onResetButtonClick();
     }
